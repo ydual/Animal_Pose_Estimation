@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Slate is a responsive theme for GitHub Pages" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet"/>
+    <link href="stylesheets/offcanvas.css" rel="stylesheet"/>
+    <link href="stylesheets/twentytwenty.css" rel="stylesheet" type="text/css"/>
+    <title>Deep AnimalPose</title>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ydual/Deep-AnimalPose/">View on GitHub</a>
+
+          <h1 id="project_title">Deep AnimalPose</h1>
+          <h2 id="project_tagline">A Generative Parametric Representation for 3D Quadrupedal Animal Pose Estimation</h2>
+          <h2 id="project_author" >DU Yinwei, ZHANG Ziyan</h2>
+
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <nav class="navbar navbar-default navbar-fixed-top _navbar-inverse">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#abstract">Abstract</a></li>
+                            <li><a href="#hierarchical">Hierarchical Model</a></li>
+                            <li><a href="#range">Range and Distribution of the Dataset</a></li>
+                            <li><a href="#framework">Framework Architecture</a></li>
+                            <li><a href="#single">Single Frame</a></li>
+                            <li><a href="#video">Video Sequence</a></li>
+                        </ul>
+                    </div>
+            
+                </div>
+            </nav>
+
+        <img alt="an octocat!" src="images/image_1.png" style="width:100%"/>
+        <p>
+            Rotational view of the above animals:
+        </p>
+        <div class="row">
+            <div class="column">
+                <p align="center">
+                    Giraffe
+                </p>
+              <img src="images/rotate_azimuth_angle_giraffe.gif" style="width:100%">
+            </div>
+            <div class="column">
+                <p align="center">
+                    Koala
+                </p>
+                <img src="images/rotate_azimuth_angle_koala.gif" style="width:100%">
+            </div>
+            <div class="column">
+                <p align="center">
+                    Cub
+                </p>
+                <img src="images/rotate_azimuth_angle_cub.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <p align="center">
+                    Alpaca
+                </p>
+              <img src="images/rotate_azimuth_angle_ma.gif" style="width:100%">
+            </div>
+            <div class="column">
+                <p align="center">
+                    Lion
+                </p>
+                <img src="images/rotate_azimuth_angle_lion.gif" style="width:100%">
+            </div>
+            <div class="column">
+                <p align="center">
+                    Panda
+                </p>
+                <img src="images/rotate_azimuth_angle_panda.gif" style="width:100%">
+            </div>
+        </div>
+        
+        
+
+        <h2 id = "abstract">Abstract</h2>
+        <p>
+            Videography provides valuable data for studying animal behaviors where noninvasive tracking of animals is the essential first step. 
+            This paper introduces a parametric approach for generating a massive synthetic dataset for quadrupeds containing more than 10 million ground-truth 3D poses with corresponding 2D landmarks.
+            The generated poses are valid since they are constrained by a hierarchical skeletal model. Our dataset for single-image 3D pose estimation 
+            can be readily extended to videos. Two novel network architectures are proposed for 3D pose estimation, one for single images and the other for videos. We demonstrate previously unseen and strong results on tracking quadrupedal animals movements in video sequences while estimating the corresponding 3D pose sequences. We present 
+            quantitative evaluation and ablation studies, and further demonstrate our approach's 
+            generalizability by estimating 3D poses in significantly different
+            body configurations, and vastly different postures where not all four legs are on the ground.
+        </p>
+
+        <h2 id = "hierarchical">Hierarchical Model</h2>
+        <p>
+          Our hierarchical model contains 23 joint points (some joints may be omitted depending on different species) and is shown in the following figure:
+        </p>
+        <img src="images/hierarchy_v2.png" style="width:100%"/>
+    
+        <h2 id = "range">
+            Range and Distribution of our Synthetic Dataset
+        </h2>
+        <p>
+            The following figures show the range and distribution of our synthetic dataset for each pair of joint connection. The left column shows the distribution and
+            the right column shows the corrsponding position in the skeleton (marked by red arrow). 
+        </p>
+        Backbone
+        <div class="row">
+            <div class="column">
+            <img src="images/range/backbone.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/backbone_.png" style="width:120%">
+            </div>
+        </div>
+        Forward Limb Left Joint 1
+        <div class="row">
+            <div class="column">
+                <img src="images/range/forward limb left joint 1.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/forward limb left joint 1_.png" style="width:120%">
+            </div>
+        </div>
+        Forward Limb Left Joint 2
+        <div class="row">
+            <div class="column">
+                <img src="images/range/forward limb left joint 2.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/forward limb left joint 2_.png" style="width:120%">
+            </div>
+        </div>
+        Forward Limb Right Joint 3
+        <div class="row">
+            <div class="column">
+                <img src="images/range/forward limb right joint 3.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/forward limb right joint 3_.png" style="width:120%">
+            </div>
+        </div>
+        Forward Limb Right Joint 4
+        <div class="row">
+            <div class="column">
+                <img src="images/range/forward limb right joint 4.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/forward limb right joint 4_.png" style="width:120%">
+            </div>
+        </div>
+        Head Joint
+        <div class="row">
+            <div class="column">
+                <img src="images/range/head joint.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/head joint_.png" style="width:120%">
+            </div>
+        </div>
+        Left Eye    
+        <div class="row">
+            <div class="column">
+                <img src="images/range/left eye.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/left eye_.png" style="width:120%">
+            </div>
+        </div>
+        Right Eye     
+        <div class="row">
+            <div class="column">
+                <img src="images/range/right eye.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/right eye_.png" style="width:120%">
+            </div>
+        </div>  
+        Tail
+        <div class="row">
+            <div class="column">
+                <img src="images/range/tail.jpg" style="width:120%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/range/tail_.png" style="width:120%">
+            </div>
+        </div>
+
+        <h2 id = "framework">Framework Architecture</h2>
+        <p>
+           Following is the figure illustrating our frame architecture. In short, we take the landmarks of an animal in a video sequence as the input and pass through
+           two separate deep neural network and output the predicted 3D skeletons.
+        </p>
+        <p>
+            <img src="images/framework.png" style="width:150%"/>
+        </p>
+        <p>
+            Detailed architecture for our single-image network:
+        </p>
+        <p>
+            <img src="images/2d-to-3d.png" style="width:120%"/>
+        </p>
+        <p>
+            Detailed architecture for our temporal coherence network:
+        </p>
+        <p>
+            <img src="images/temporal.png" style="width:120%"/>
+        </p>
+    
+
+        <h2 id = "single">
+          Single Frame Result
+        </h2>
+
+        <p>
+          Here is the results of our framework on single frame images (i.e. without the temporal network): the three columns are namely: original image with skeleton overlaid,
+          2D projection of the skeleton and 3D skeleton (in a different view angle). All images in the following two sections are from TigDog dataset.
+        </p>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/1-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/1-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/1-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/2-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/2-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/2-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/3-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/3-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/3-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/4-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/4-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/4-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/5-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/5-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/5-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/6-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/6-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/6-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/7-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/7-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/7-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/8-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/8-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/8-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/9-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/9-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/9-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/10-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/10-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/10-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/11-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/11-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/11-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/12-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/12-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/12-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/13-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/13-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/13-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/14-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/14-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/14-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/15-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/15-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/15-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/16-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/16-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/16-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/17-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/17-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/17-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/18-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/18-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/18-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/19-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/19-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/19-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/20-1.png" style="width:57.5%">
+            </div>
+            <div class="column">
+                <img src="images/single/20-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/20-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/21-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/21-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/21-3.png" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+              <img src="images/single/22-1.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/22-2.png" style="width:100%">
+            </div>
+            <div class="column">
+                <img src="images/single/22-3.png" style="width:100%">
+            </div>
+        </div>
+        <h2 id = "video">
+            Video Sequence Results
+        </h2>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_6.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_6.gif" style="width:100%">
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="column">
+                <img src="images/video/horse_9.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_9.gif" style="width:150%">
+            </div>
+        </div> -->
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_10.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_10.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_12.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_12.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_13.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_13.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_14.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_14.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_15.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_15.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_16.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_16.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_17.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_17.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/horse_20.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/horse_skeleton_20.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/caonima.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/caonima_skeleton.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/laohu.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/laohu_skeleton.gif" style="width:100%">
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/gaoxiao.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/gaoxiao_skeleton.gif" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column">
+                <img src="images/video/bear.gif" style="width:150%">
+            </div>
+            <div class="column">
+            </div>
+            <div class="column">
+                    <img src="images/video/bear_skeleton.gif" style="width:100%">
+            </div>
+        </div>
+
+
+    </div>
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+        <footer class="inner">
+          <p class="copyright">Slate theme maintained by <a href="https://github.com/jasoncostello">Jason Costello</a></p>
+          <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        </footer>
+      </div>
+
+  </body>
+</html>
